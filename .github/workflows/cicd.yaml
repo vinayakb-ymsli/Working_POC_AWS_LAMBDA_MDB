@@ -21,15 +21,15 @@ jobs:
 
       - name: Build Docker image
         run:  |
-              docker build -t $secrets.ECR_REGISTRY_URL .
+              docker build -t $secrets.ECR_REGISTRY_URL:$IMAGE_TAG .
               echo "build complete"
 
-      - name: Tag Image
-        env: 
-          IMAGE_TAG: latest
-        run:  |
-              docker tag ${{ secrets.ECR_REGISTRY_URL }}:IMAGE_TAG ${{ secrets.ECR_REGISTRY_URL }}:$IMAGE_TAG
-              echo "tag complete" 
+      # - name: Tag Image
+      #   env: 
+      #     IMAGE_TAG: latest
+      #   run:  |
+      #         docker tag ${{ secrets.ECR_REGISTRY_URL }}:IMAGE_TAG ${{ secrets.ECR_REGISTRY_URL }}:$IMAGE_TAG
+      #         echo "tag complete" 
 
       - name: ECR Login
         run:  |
