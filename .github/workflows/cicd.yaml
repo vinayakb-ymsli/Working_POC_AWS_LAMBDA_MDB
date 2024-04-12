@@ -23,5 +23,5 @@ jobs:
         run: |
           docker build -t $secrets.ECR_REGISTRY_URL .
           docker tag $secrets.ECR_REGISTRY_URL:latest
-          docker login -u AWS -p "${{ secrets.AWS_ACCESS_KEY_ID }}" "${{ secrets.AWS_SECRET_ACCESS_KEY }}" ${{ secrets.ECR_REGISTRY_URL }}
+          docker login -u AWS -p "${{ secrets.AWS_ACCESS_KEY_ID }}" "${{ secrets.AWS_SECRET_ACCESS_KEY }}" ${{ secrets.ECR_REGISTRY_URL }}:latest
           docker push $secrets.ECR_REGISTRY_URL:latest
