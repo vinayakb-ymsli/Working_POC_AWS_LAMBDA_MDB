@@ -28,7 +28,7 @@ jobs:
         env: 
           IMAGE_TAG: latest
         run:  |
-              docker tag $secrets.ECR_REGISTRY_URL:$IMAGE_TAG
+              docker tag ${{ secrets.ECR_REGISTRY_URL }}:IMAGE_TAG ${{ secrets.ECR_REGISTRY_URL }}:$IMAGE_TAG
               echo "tag complete" 
 
       - name: ECR Login
