@@ -20,8 +20,13 @@ jobs:
         uses: docker/setup-buildx-action@v1
 
       - name: Build Docker image
-        run: |
-          docker build -t $secrets.ECR_REGISTRY_URL .
-          docker tag $secrets.ECR_REGISTRY_URL:latest
-          docker login -u AWS -p "${{ secrets.AWS_ACCESS_KEY_ID }}" "${{ secrets.AWS_SECRET_ACCESS_KEY }}" ${{ secrets.ECR_REGISTRY_URL }}:latest
-          docker push $secrets.ECR_REGISTRY_URL:latest
+        run:  docker build -t $secrets.ECR_REGISTRY_URL .
+              echo "build complete"
+        name: Tag Image
+        run:  docker tag $secrets.ECR_REGISTRY_URL:latest
+              echo "tag complete"  
+        name: ECR Login
+        run:  docker login -u AWS -p "${{ secrets.AWS_ACCESS_KEY_ID }}" "${{ secrets.AWS_SECRET_ACCESS_KEY }}" ${{ secrets.ECR_REGISTRY_URL }}:latest
+              echo "Login Complete"
+        name: Image Push  
+        run:  docker push $secrets.ECR_REGISTRY_URL:latest
