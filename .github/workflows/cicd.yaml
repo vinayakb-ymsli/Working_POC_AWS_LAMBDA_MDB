@@ -1,0 +1,27 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - withcicd
+  pull_request:
+    branches:
+      - withcicd
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Build Docker image
+        run: |
+          docker build -t ${{ secrets.ECR_REGISTRY_URL }}/mdb_lambda .
+          docker tag mdb_lambda:latest ${{ secrets.ECR_REGISTRY_URL }}/mdb_lambda:latest
+          docker login -u AWS -p "${{ secrets.AWS_ACCESS_KEY_ID }}" "${{ secrets.AWS_SECRET_ACCESS_KEY }}" ${{ secrets.ECR_REGISTRY_URL }}
+          docker push ${{ secrets.ECR_REGISTRY_URL }}/mdb_lambda:latest
