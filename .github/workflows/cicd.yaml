@@ -21,7 +21,7 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build -t ${{ secrets.ECR_REGISTRY_URL }}/mdb_lambda .
-          docker tag mdb_lambda:latest ${{ secrets.ECR_REGISTRY_URL }}/mdb_lambda:latest
+          docker build -t $secrets.ECR_REGISTRY_URL .
+          # docker tag $secrets.ECR_REGISTRY_URL
           docker login -u AWS -p "${{ secrets.AWS_ACCESS_KEY_ID }}" "${{ secrets.AWS_SECRET_ACCESS_KEY }}" ${{ secrets.ECR_REGISTRY_URL }}
           docker push ${{ secrets.ECR_REGISTRY_URL }}/mdb_lambda:latest
