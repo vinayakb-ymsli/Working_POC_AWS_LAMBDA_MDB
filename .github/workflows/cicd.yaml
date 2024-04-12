@@ -24,15 +24,15 @@ jobs:
               docker build -t $secrets.ECR_REGISTRY_URL .
               echo "build complete"
 
-        name: Tag Image
+      - name: Tag Image
         run:  |
               docker tag $secrets.ECR_REGISTRY_URL:latest
               echo "tag complete" 
 
-        name: ECR Login
+      - name: ECR Login
         run:  |
               docker login -u AWS -p "${{ secrets.AWS_ACCESS_KEY_ID }}" "${{ secrets.AWS_SECRET_ACCESS_KEY }}" ${{ secrets.ECR_REGISTRY_URL }}:latest
               echo "Login Complete"
 
-        name: Image Push  
+      - name: Image Push  
         run:  docker push $secrets.ECR_REGISTRY_URL:latest
