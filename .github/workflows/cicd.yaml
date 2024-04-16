@@ -28,7 +28,7 @@ jobs:
 
       - name: ECR Login
         run:  |
-              docker login -u AWS -p "${{ secrets.AWS_ACCESS_KEY_ID }}" -e none "${{ secrets.ECR_REGISTRY_URL }}"
+              docker login -u AWS -p "${{ secrets.AWS_ACCESS_KEY_ID }}" "${{ secrets.ECR_REGISTRY_URL }}"
               echo "Login Complete"
 
       - name: Image Push  
