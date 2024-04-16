@@ -26,10 +26,9 @@ jobs:
               docker build -t ${{ secrets.ECR_REGISTRY_URL }}:$IMAGE_TAG .
               echo "build complete"
 
-      - name: ECR Login
-        run:  |
-              docker login -u AWS -p "${{ secrets.AWS_ACCESS_KEY_ID }}" "${{ secrets.ECR_REGISTRY_URL }}"
-              echo "Login Complete"
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
 
       - name: Image Push  
         run:  docker push ${{ secrets.ECR_REGISTRY_URL }}:$IMAGE_TAG
