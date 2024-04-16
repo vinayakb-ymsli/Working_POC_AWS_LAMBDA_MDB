@@ -23,7 +23,7 @@ RUN pip3 install -r requirements.txt
 # RUN apk add --no-cache mesa-dri-swrast
 
 #copy function code to container
-COPY lambda_function.py ./
+COPY src/lambda_function.py ./
 
 #setting the CMD to your handler file_name.function_name
 CMD ["lambda_function.lambda_handler"]
