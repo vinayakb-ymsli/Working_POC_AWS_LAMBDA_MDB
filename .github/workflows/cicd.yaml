@@ -37,5 +37,5 @@ jobs:
           ECR_REPOSITORY_NAME: ${{ secrets.ECR_REPOSITORY_NAME }}
           IMAGE_TAG: latest
         run: |
-          docker push $ECR_REGISTRY/$ECR_REPOSITORY_NAME:$IMAGE_TAG
+          docker push $AWS_ECR_LOGIN_URI/$ECR_REPOSITORY_NAME:$IMAGE_TAG
           echo "::set-output name=image::$AWS_ECR_LOGIN_URI/$ECR_REPOSITORY_NAME:$IMAGE_TAG"
