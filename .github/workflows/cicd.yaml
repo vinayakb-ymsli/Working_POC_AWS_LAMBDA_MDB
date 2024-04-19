@@ -3,10 +3,10 @@ name: CI/CD Pipeline
 on:
   push:
     branches:
-      - withcicd
+      - aryan_test
   pull_request:
     branches:
-      - withcicd
+      - aryan_test
 
 jobs:
   build-and-deploy:
