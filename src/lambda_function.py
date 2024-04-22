@@ -59,7 +59,7 @@ def upload_image_to_s3(image_data, bucket, outputkey):
         print(f"Error uploading image to S3: {e}")
         return False
 
-#lambda_handler start
+#lambda_handler startt
 def lambda_handler(event, context):
     # Check if the event is an S3 event
     print("this is event",event)
